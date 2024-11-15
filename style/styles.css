@@ -72,6 +72,15 @@ body #terminal {
   overflow: auto;
 }
 
+#ascii-art-lastname{
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: pre;
+  color: green; 
+  width: 100%;
+  overflow: auto;
+}
+
 #command-interface {
   vertical-align: top;
 }
