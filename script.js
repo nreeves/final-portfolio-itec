@@ -148,25 +148,25 @@ input.addEventListener("keydown", function (event) {
     event.preventDefault();
     commandHistory.push(input.value);
     input.value = input.value.toLowerCase();
-      const command = input.value.trim().split(" ")[0];
-      const commandArgs = input.value.trim().split(" ")[1];
-      input.value = "";
-      output.innerHTML += `${prompt.innerHTML}${command} ${commandArgs || ''}<br /> <br />`;
-        if (commandFunctions[command]) {
-          output.innerHTML += commandFunctions[command](`${command} ${commandArgs}`) + "<br />";
-          if (postRenderFunctions[command]) {
-            postRenderFunctions[command]();
-          }
-        } else if (command === "clear") {
-          output.innerHTML = "";
-      } else {
-            output.innerHTML += `<span class="text-red">Invalid command: ${command}</span>. <br> Type <span class="text-green">help</span> for a list of commands.`
-        }
-        if (command !== "clear") {
-            output.innerHTML += "<br> <br>"
-        }
-        scrollToBottom()
+    const command = input.value.trim().split(" ")[0];
+    const commandArgs = input.value.trim().split(" ")[1];
+    input.value = "";
+    output.innerHTML += `${prompt.innerHTML}${command} ${commandArgs || ''}<br /> <br />`;
+    if (commandFunctions[command]) {
+      output.innerHTML += commandFunctions[command](`${command} ${commandArgs}`) + "<br />";
+      if (postRenderFunctions[command]) {
+        postRenderFunctions[command]();
+      }
+    } else if (command === "clear") {
+      output.innerHTML = "Type <span class='text-green'>help</span> for a list of commands. <br /><br />";
+    } else {
+      output.innerHTML += `<span class="text-red">Invalid command: ${command}</span>. <br> Type <span class="text-green">help</span> for a list of commands.`;
     }
+    if (command !== "clear") {
+      output.innerHTML += "<br><br>";
+    }
+    scrollToBottom();
+  }
   if (event.key === "Tab") {
     event.preventDefault();
     input.value = autoCompleteCommand(input.value);
