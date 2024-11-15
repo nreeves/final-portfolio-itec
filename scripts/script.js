@@ -121,7 +121,7 @@ input.addEventListener("keydown", function (event) {
     }
     scrollToBottom();
   }
-// michael helped
+  // ... Other key events (Tab, ArrowUp, ArrowDown)
   resizeInput();
 });
 
@@ -131,12 +131,12 @@ input.addEventListener(function (event) {
   }
 });
 
-// input resizing
+// Resize input dynamically based on content
 function resizeInput() {
     input.style.width = input.value.length + 1 + "ch";
 }
 
-// window scrolling function to keep the terminal scrolling
+// Scroll to bottom of the shell container
 function scrollToBottom() {
   const shell = document.getElementById("shell");
     shell.scrollTop = output.scrollHeight;
