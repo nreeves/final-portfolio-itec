@@ -10,7 +10,7 @@ const randomBootText = [
     `Loading user portfolio ...`,
     'Displaying portfolio ...',
 ]
-
+// DOM selection and startup simulator
 const loadingBar = document.querySelector('.loading-bar');
 const fill = document.getElementById('fill');
 const character = document.createElement('div');
@@ -19,14 +19,16 @@ const commandSection = document.getElementById('command-interface');
 const asciiArtSection = document.getElementById('loading-ascii-art');
 const loadingText = document.getElementById('loading-text');
 
+//style adjustment
 asciiArtSection.innerHTML = loadingASCII;
 asciiArtSection.style.display = 'block';
-asciiArtSection.style.width= '450px';
+asciiArtSection.style.width= '600px';
 loadingText.innerHTML = `Loading ...`;
 commandSection.style.display = 'none';
 character.innerHTML = pending_ASCII;
 character.style.position = 'absolute';
 character.style.visibility = 'hidden';
+//filling the bar
 document.body.appendChild(character);
 const widthOfOneCharacter = character.clientWidth;
 const windowWidth = window.innerWidth;
@@ -65,3 +67,9 @@ const interval = setInterval(() => {
   }
 }, 500);
 
+// ░ called medium shade in ascii 
+// summary of what its doing, dynamically measuring the width of the pending ascii character by
+// generating an invisible div, character.clientwidth gives the pixel width of ░
+// program then calculates the browser window in pixels and dynamically sizes the
+// loading bar based on screensize
+//finally the makes the loading bar 50% of the screen, ensures that the loading bar is minimum 350 px on smaller screens 

@@ -63,6 +63,15 @@ body #terminal {
   text-align: center;
 }
 
+#ascii-art {
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: pre;
+  color: white; 
+  width: 100%;
+  overflow: auto;
+}
+
 #command-interface {
   vertical-align: top;
 }
@@ -213,3 +222,4 @@ body #terminal {
         
     }
 }
+

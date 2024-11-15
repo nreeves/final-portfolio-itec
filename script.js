@@ -7,6 +7,7 @@ const FileSystem = {
         return xhr.responseText;
     },
 };
+//interface prompt
 
 const asciiArt = `
 
@@ -17,7 +18,6 @@ const asciiArt = `
 ██║ ╚████║██║  ██║   ██║   ███████╗    ██║  ██║███████╗███████╗ ╚████╔╝ ███████╗███████║
 ╚═╝  ╚═══╝╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝  ╚═╝╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚══════╝
 
-Type "Help" for a list of the current commands!
 `;
 document.getElementById('ascii-art').innerText = asciiArt;
 
@@ -31,44 +31,21 @@ const technologies = [
 ];
 
 const commands = [
-    {
-        name: "help",
-        description: "list all available commands",
-    },
-    {
-        name: "about",
-        description: "introduction about me",
-    },
-    {
-        name: "skills",
-        description: "list of technologies I have worked with",
-    },
-    {
-        name: "contact",
-        description: "contact information",
-    },
-    {
-        name: "projects",
-        description: "list of projects",
-    },
-    {
-        name: "clear",
-        description: "clear the terminal",
-  },
-  {
-    name: "links",
-    description: "list all the links",
-  },
-  {
-    name: "open [link-name]",
-    description: "open a link in a new tab",
-  },
+  { name: "help", description: "list all available commands" },
+  { name: "about", description: "about me" },
+  { name: "skills", description: "languages + tools" },
+  { name: "contact", description: "contact" },
+  { name: "projects", description: "projects" },
+  { name: "clear", description: "clear the terminal" },
+  { name: "links", description: "list all the links" },
+  { name: "open [link-name]", description: "open a link in a new tab" }
 ];
 
 const links = {
   "github": "https://github.com/nreeves",
   "linkedin": "https://www.linkedin.com/in/nreeves",
   "buffaloretreat": "https://github.com/nreeves/buffalo-retreat",
+  "medicifoundation": "insert soon"
 };
 
 const commandHistory = [];
@@ -90,6 +67,20 @@ function autoCompleteCommand(command) {
   return autoCompleteCommand;
 }
 
+// Ensure the input box is automatically focused when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+  const input = document.getElementById("command-input");
+  input.focus(); // Automatically focus the input field
+});
+
+// Keep the input box focused even if the user clicks outside it
+document.addEventListener("click", (event) => {
+  const input = document.getElementById("command-input");
+  if (!event.target.closest("#command-input")) {
+      input.focus();
+  }
+});
+
 
 const commandFunctions = {
     help: function () {
@@ -100,25 +91,18 @@ const commandFunctions = {
         return helpText;
     },
     about: function () {
-        // Read about section from about.html
-        // return aboutText;
         const aboutText = FileSystem.readFile("commands/about.html");
         return aboutText;
   },
   projects: function () {
-    // Read about section from about.html
-    // return aboutText;
     const project = FileSystem.readFile("commands/project.html");
     return project;
   },
   contact: function () {
-    // Read about section from about.html
-    // return aboutText;
     const contact = FileSystem.readFile("commands/contact.html");
     return contact;
   },
     skills: function () {
-        // Create a table of technologies
         const { table, maxCellLength } = createTable(technologies);
         const containerWidth = maxCellLength * technologies[0].length * 10 + 20;
         const tableContainer = `<div style="width:${containerWidth}px" class="text-green"> <pre>${table}</pre> </div>`;
