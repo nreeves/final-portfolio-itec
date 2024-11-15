@@ -7,7 +7,6 @@ const FileSystem = {
         return xhr.responseText;
     },
 };
-//interface prompt
 
 const asciiArt = `
 
@@ -21,6 +20,7 @@ const asciiArt = `
 `;
 document.getElementById('ascii-art').innerText = asciiArt;
 
+// Output and Input setup
 const output = document.getElementById("output");
 const input = document.getElementById("command-input");
 const prompt = document.getElementById("prompt");
@@ -30,58 +30,22 @@ const technologies = [
     ["GIT", "Django"]
 ];
 
-const commands = [
-  { name: "help", description: "list all available commands" },
-  { name: "about", description: "about me" },
-  { name: "skills", description: "languages + tools" },
-  { name: "contact", description: "contact" },
-  { name: "projects", description: "projects" },
-  { name: "clear", description: "clear the terminal" },
-  { name: "links", description: "list all the links" },
-  { name: "open [link-name]", description: "open a link in a new tab" }
-];
-
-const links = {
-  "github": "https://github.com/nreeves",
-  "linkedin": "https://www.linkedin.com/in/nreeves",
-  "buffaloretreat": "https://github.com/nreeves/buffalo-retreat",
-  "medicifoundation": "insert soon"
-};
-
 const commandHistory = [];
 let commandHistoryIndex = 0;
 
-
-function autoCompleteCommand(command) {
-  const commandName = command.split(" ")[0];
-  const commandArgs = Object.keys(links).find((link) => link.startsWith(command.split(" ")[1]));
-  const commandList = commands.map((command) => command.name);
-  const filteredCommands = commandList.filter((command) => command.startsWith(commandName));
-  let autoCompleteCommand = command;
-  if (filteredCommands.length === 1) {
-    autoCompleteCommand = filteredCommands[0].split(" ")[0];
-  }
-  if (filteredCommands?.length === 1 && commandArgs) {
-      autoCompleteCommand = autoCompleteCommand +" "+commandArgs;
-  }
-  return autoCompleteCommand;
-}
-
-// Ensure the input box is automatically focused when the page loads
+// Auto-focus input node on page load
 document.addEventListener("DOMContentLoaded", () => {
-  const input = document.getElementById("command-input");
-  input.focus(); // Automatically focus the input field
+  input.focus();
 });
 
-// Keep the input box focused even if the user clicks outside it
+// Handle click events to focus on the input node
 document.addEventListener("click", (event) => {
-  const input = document.getElementById("command-input");
   if (!event.target.closest("#command-input")) {
       input.focus();
   }
 });
 
-
+// Updated commandFunctions (no changes)
 const commandFunctions = {
     help: function () {
         let helpText = "commands: <br> <br>";
@@ -93,56 +57,46 @@ const commandFunctions = {
     about: function () {
         const aboutText = FileSystem.readFile("commands/about.html");
         return aboutText;
-  },
-  projects: function () {
-    const project = FileSystem.readFile("commands/project.html");
-    return project;
-  },
-  contact: function () {
-    const contact = FileSystem.readFile("commands/contact.html");
-    return contact;
-  },
+    },
+    projects: function () {
+        const project = FileSystem.readFile("commands/project.html");
+        return project;
+    },
+    contact: function () {
+        const contact = FileSystem.readFile("commands/contact.html");
+        return contact;
+    },
     skills: function () {
         const { table, maxCellLength } = createTable(technologies);
         const containerWidth = maxCellLength * technologies[0].length * 10 + 20;
         const tableContainer = `<div style="width:${containerWidth}px" class="text-green"> <pre>${table}</pre> </div>`;
         return tableContainer;
     },
-  open: function (command) {
-
-      const linkName = command.split(" ")[1];
-      if (links[linkName]) {
-        window.open(links[linkName], "_blank");
-        return `Opening ${linkName} in a new tab`;
-      } else {
-        return `<span class="text-red">Invalid link name: ${linkName}</span>`;
-      }
-  },
-  links: function () {
-    let list = "";
-    for (const linkName in links) {
-      list += `${linkName} <br>`;
+    open: function (command) {
+        const linkName = command.split(" ")[1];
+        if (links[linkName]) {
+            window.open(links[linkName], "_blank");
+            return `Opening ${linkName} in a new tab`;
+        } else {
+            return `<span class="text-red">Invalid link name: ${linkName}</span>`;
+        }
+    },
+    links: function () {
+        let list = "";
+        for (const linkName in links) {
+            list += `${linkName} <br>`;
+        }
+        list += `<br><span class="text-gray">Type "open <span class="text-pink">[link-name]</span>" to open a link in a new tab</span>`;
+        return list;
+    },
+    surprise: function () {
+        const asciiContent = getRandomASCII();
+        return `<pre class="ascii-art">${asciiContent}</pre>`;
     }
-    list += `<br><span class="text-gray">Type "open <span class="text-pink">[link-name]</span>" to open a link in a new tab</span>`;
-    return list;
-  },
-  surprise: function () {
-    const asciiContent = getRandomASCII();
-    return `<pre class="ascii-art">${asciiContent}</pre>`;
-  }
-};
-
-const postRenderFunctions = {
-  projects: function () {
-    const outputProjects = document.getElementsByClassName("output-project");
-    for (const outputProject of outputProjects) {
-      outputProject.appendChild(document.createTextNode('---'.repeat(40)));
-    }
-   }
 };
 
 output.innerHTML += "Type <span class='text-green'>help</span> for a list of commands. <br /> <br />";
-input.focus();  
+input.focus();
 input.addEventListener("keydown", function (event) {
   if (event.key === "Enter") {
     event.preventDefault();
@@ -167,33 +121,8 @@ input.addEventListener("keydown", function (event) {
     }
     scrollToBottom();
   }
-  if (event.key === "Tab") {
-    event.preventDefault();
-    input.value = autoCompleteCommand(input.value);
-  }
-  if (event.key === "ArrowUp") {
-    if (commandHistory.length === 0) {
-      return;
-     }
-    event.preventDefault();
-    if (commandHistoryIndex === commandHistory.length) {
-      commandHistoryIndex = 0;
-    }
-    input.value = commandHistory[commandHistory.length - 1 - commandHistoryIndex];
-    commandHistoryIndex++;
-  }
-  if (event.key === "ArrowDown") {
-    event.preventDefault();
-    if (commandHistory.length === 0) {
-      return;
-     }
-    if (commandHistoryIndex === 0) {
-      commandHistoryIndex = commandHistory.length;
-    }
-    commandHistoryIndex--;
-    input.value = commandHistory[commandHistory.length - 1 - commandHistoryIndex];
-  }
-    resizeInput();
+// michael helped
+  resizeInput();
 });
 
 input.addEventListener(function (event) {
@@ -202,17 +131,19 @@ input.addEventListener(function (event) {
   }
 });
 
+// input resizing
 function resizeInput() {
     input.style.width = input.value.length + 1 + "ch";
 }
 
-// scroll to bottom
+// window scrolling function to keep the terminal scrolling
 function scrollToBottom() {
   const shell = document.getElementById("shell");
     shell.scrollTop = output.scrollHeight;
     window.scroll(0, output.scrollHeight);
 }
 
+// Create table (for skills list)
 function createTable(data) {
     let maxCellLength = 0;
     for (let i = 0; i < data.length; i++) {
@@ -224,8 +155,6 @@ function createTable(data) {
     }
 
     let topBorder = "┌" + "─".repeat(maxCellLength + 2) + "┬" + "─".repeat(maxCellLength + 2) + "┬" + "─".repeat(maxCellLength + 2) + "┬" + "─".repeat(maxCellLength + 2) + "┐";
-
-    // table rows
     let dataRows = "";
     for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].length; j++) {
@@ -240,23 +169,19 @@ function createTable(data) {
             dataRows += "├" + "─".repeat(maxCellLength + 2) + "┼" + "─".repeat(maxCellLength + 2) + "┼" + "─".repeat(maxCellLength + 2) + "┼" + "─".repeat(maxCellLength + 2) + "┤\n";
         }
     }
-
-    // Create the bottom border of the table
     let bottomBorder = "└" + "─".repeat(maxCellLength + 2) + "┴" + "─".repeat(maxCellLength + 2) + "┴" + "─".repeat(maxCellLength + 2) + "┴" + "─".repeat(maxCellLength + 2) + "┘";
 
-    // Concatenate all the parts to create the final table
     let table = topBorder + "\n" + dataRows + bottomBorder;
 
-  return { maxCellLength, table };
-  
+    return { maxCellLength, table };
 }
 
+// Get a random ASCII art (optional)
 function getRandomASCII() {
   const asciiArts = [
-
+    // Example ASCII arts could be added here
   ];
   const random = Math.floor(Math.random() * asciiArts.length);
   const ascii = asciiArts[random];
-  console.log(ascii);
   return ascii;
 }
