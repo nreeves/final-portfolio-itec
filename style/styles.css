@@ -1,0 +1,318 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
+
+:root {
+  --cursor-visibility: hidden;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none; /* explorer + others */
+  scrollbar-width: none;   /* firefox */
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Inconsolata", monospace;
+  font-size: 100%;
+  line-height: 4.1vmin;
+  font-weight: normal;
+  background-color: #1e282c; 
+  color: #657b83; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+body #terminal {
+  color: #657b83; 
+}
+
+.shell {
+  color: white;
+  font-family: "Inconsolata", monospace;
+  overflow: auto;
+  padding: 10px;
+  height: 100vh;
+}
+
+#loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#fill {
+  overflow: clip;
+}
+
+.loading-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  height: 90vh;
+}
+
+#loading-text {
+  margin-top: 20px;
+}
+
+#load-ascii {
+  text-align: center;
+}
+
+#ascii-art {
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: pre;
+  color: white; 
+  width: 100%;
+  overflow: auto;
+}
+
+#ascii-last{
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: pre;
+  color: green; 
+  width: 100%;
+  overflow: auto;
+}
+
+#command-UI {
+  vertical-align: top;
+}
+
+.menu {
+  margin-bottom: 10px;
+}
+
+.menu-item {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.prompt {
+  display: inline-block;
+}
+
+.input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: monospace;
+  font-size: inherit;
+  outline: none;
+  width: 1ch;
+  caret-color: transparent;
+}
+
+.output,
+.output-project {
+  background-color: transparent;
+  color: white;
+  margin: 0;
+  padding: 0;
+  overflow-y: hidden;
+}
+
+.text-green {
+  color: #7cfc00;
+}
+
+.text-blue {
+  color: #b0e0e6;
+}
+
+.text-yellow {
+  color: #ffff00;
+}
+
+.text-pink {
+  color: #ff1493;
+}
+
+.text-red {
+  color: #ff0000;
+}
+
+.text-orange {
+  color: #ffa500;
+}
+
+.text-gray {
+  color: #acadab;
+}
+
+#terminal-line {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#prompt {
+  font-size: 12px;
+}
+
+#command {
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+#cursor {
+  font-size: 24px;
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.input {
+  font-size: 1em;
+  width: auto;
+  min-width: 2ch;
+   }
+}
+
+    .project-showcase {
+  padding: 1rem 0;
+}
+
+.pcard {
+  margin: 2rem 0;
+  padding: 1rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.pcontent {
+  margin: 1rem 0;
+}
+
+.pcontent h2 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+}
+
+.feature-list li {
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+  position: relative;
+}
+
+.feature-list li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+}
+
+.project-links {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.link-tag {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.link-tag:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.command-instruction {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.text-green { color: #98c379; }
+.text-yellow { color: #e5c07b; }
+.text-pink { color: #e06c75; }
+.text-gray { color: #abb2bf; }
+
+
+@media (max-width: 768px) {
+  body,
+  html {
+      font-size: 85%;
+      line-height: 4.5vmin;
+      padding: 0 10px;
+  }
+
+  #terminal,
+  .shell {
+      width: 100%;
+      padding: 8px;
+      height: auto;
+  }
+
+  .loading-bar {
+      margin-top: 20px;
+      height: 80vh;
+  }
+
+  #loading-text {
+      font-size: 1.2em;
+  }
+
+  .menu-item {
+      margin-right: 5px;
+  }
+
+  .output,
+  .output-project {
+      padding: 5px;
+      overflow-y: auto;
+  }
+
+  #command-line {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .prompt {
+      margin-bottom: 8px;
+  }
+}
+
+@media screen and (max-width: 900px, max-height: 100%,) {
+    .ascii, #load-ascii 
+        font-size: 10px;
+        content-align: center;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .ascii, .ascii-art, #load-ascii {
+        font-size: 5px;
+        
+    }
+}
+
+@media (max-width: 768px) {
+  body,
+  html {
+      font-size: 85%;
+      line-height: 4.5vmin;
+      padding: 0 10px;
+  }
+

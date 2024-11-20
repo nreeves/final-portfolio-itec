@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Nate">
+    <meta name="keywords" content="Nate reeves, Portfolio, programming, ">
+    <meta name="author" content="Nate Reeves">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta property="og:image"
+    <title></title>
+    <link rel="stylesheet"  href="style/styles.css" />
+</head>
+
+<body>
+    <div class="shell" id="shell">
+        <div id = "loading" class="text-blue">
+            <br>
+            <br>
+            <div class="loading-bar">
+                <pre id="load-ascii"></pre>
+                <div id="loading-text"></div>
+                <div id="fill"></div>
+                <pre class="loading-bar__animation"></pre>
+              </div>
+        </div>
+        <div id = "command-UI">
+            <div class="ascii">
+                <pre id="ascii-art"></pre>
+            </div>
+            <div id="output"></div>
+            <div id="terminal-line">
+                <span id="prompt" ><span class="text-blue">@nreeves/portfolio:$</span></span>
+                <input type="text" id="cinput" class="input" autofocus>
+                <span id="cursor">_</span>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="scripts/loading.js" type="module"></script>
+<script src="scripts/script.js" type="module"></script>
+<script src="scripts/commands.js"></script>
+
