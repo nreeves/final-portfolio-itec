@@ -41,7 +41,11 @@ const commands = [
   const links = {
     "github": "https://github.com/nreeves",
     "linkedin": "https://www.linkedin.com/in/nreeves",
+    "twitter": "https://twitter.com/nreeves",
+    "instagram": "https://www.instagram.com/nreeves_em",
+    "leetcode": "https://leetcode.com/nreeves",
     "v1": "https://nreeves.github.io/nreeves/",
+
   };
   
   const commandFunctions = {
