@@ -7,7 +7,6 @@ class FileSystem {
   }
 }
 
-// title for readability
 import TitleHeader from './title.js';
 document.getElementById('ascii-art').innerText = TitleHeader;
 
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => input.focus());
 document.addEventListener("click", () => input.focus());
 
 const commandFunctions = {
-  help() {
+  list() {
     return commands.map(command => `<span class="text-green">${command.command}</span> - ${command.details} <br>`).join('');
   },
   about() {
@@ -38,6 +37,11 @@ const commandFunctions = {
   },
   contact() {
     return FileSystem.readFile("commands/contact.html");
+  },
+  resume() {
+    const resumeURL = "commands/resume.html";
+    window.open(resumeURL, "_blank");
+    return `Opening <span class="text-green">resume</span> in a new tab.`;
   },
   skills() {
     const { table, maxCellLength } = createTable(stacklist);
@@ -55,19 +59,16 @@ const commandFunctions = {
       window.open(links[linkName], "_blank");
       return `Opening <span class="text-green">${linkName}</span> in a new tab.`;
       } else {
-        return `<span class="text-green">Invalid link name: <span class="text-gray">${linkName}</span></span>`;
+        return `<span class="text-red">Invalid link name: <span class="text-gray">${linkName}</span></span>`;
       }},
         
   
   links() {
     return Object.keys(links).map(linkName => `${linkName} <br>`).join('') + `<br><span class="text-gray">Type "open <span class="text-pink">[link-name]</span>" to open a link in a new tab</span>`;
   },
-  surprise() {
-    return `<pre class="ascii-art">${getRandomASCII()}</pre>`;
-  }
 };
 
-output.innerHTML += "Type <span class='text-green'>help</span> for a list of commands. <br /> <br />";
+output.innerHTML += "Type <span class='text-green'>list</span> for a list of commands. <br /> <br />";
 input.focus();
 
 input.addEventListener("keydown", (event) => {
@@ -81,9 +82,9 @@ input.addEventListener("keydown", (event) => {
     if (commandFunctions[commandName]) {
       output.innerHTML += commandFunctions[commandName](command) + "<br />";
     } else if (commandName === "clear") {
-      output.innerHTML = "Type <span class='text-green'>help</span> for a list of commands. <br /><br />";
+      output.innerHTML = "Type <span class='text-green'>list</span> for a list of commands. <br /><br />";
     } else {
-      output.innerHTML += `<span class="text-green">Invalid command: ${commandName}</span>. <br> Type <span class="text-green">help</span> for a list of commands.`;
+      output.innerHTML += `<span class="text-red">Invalid command: ${commandName}</span>. <br> Type <span class="text-green">list</span> for a list of commands.`;
     }
     if (commandName !== "clear") {
       output.innerHTML += "<br><br>";
@@ -115,9 +116,4 @@ function createTable(data) {
   const rows = data.map(row).join('\n├' + border('┼').repeat(data[0].length - 1) + '┤\n');
 
   return { maxCellLength, table: `${topBorder}\n${rows}\n${bottomBorder}` };
-}
-
-function getRandomASCII() {
-  const TitleHeaders = [];
-  return TitleHeaders[Math.floor(Math.random() * TitleHeaders.length)];
 }

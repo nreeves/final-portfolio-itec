@@ -1,6 +1,6 @@
 const commands = [
   { 
-    command: "help", 
+    command: "list", 
     details: "Displays all available commands." 
   },
   { 
@@ -20,15 +20,27 @@ const commands = [
     details: "Lists my projects." 
   },
   { 
-    command: "clear", 
-    details: "Clears the terminal screen." 
+    command: "resume", 
+    details: "Displays my resume." 
   },
   { 
     command: "links", 
     details: "Shows all available links." 
   },
   { 
-    command: "open [link-name]", 
+    command: "clear", 
+    details: "Clears the terminal screen." 
+  },
+  { 
+    command: "test", 
+    details: "Opens the specified link in a new tab." 
+  },
+  { 
+    command: "test", 
+    details: "Opens the specified link in a new tab." 
+  },
+  { 
+    command: "test", 
     details: "Opens the specified link in a new tab." 
   }
 ];
@@ -42,7 +54,7 @@ const commands = [
   };
   
   const commandFunctions = {
-    help: function () {
+    list: function () {
       return commands.map((command) => `<span class="text-green">${command.name}</span> - ${command.description} <br>`).join('');
     },
     about: function () {
@@ -71,7 +83,7 @@ const commands = [
       return Object.keys(links).join('<br>') + `<br><span class="text-gray">Type "open [link-name]" to open a link in a new tab</span>`;
     },
     clear: function () {
-      output.innerHTML = "Type <span class='text-green'>help</span> for a list of commands. <br><br>";
+      output.innerHTML = "Type <span class='text-green'>list</span> for a list of commands. <br><br>";
     },
   };
   

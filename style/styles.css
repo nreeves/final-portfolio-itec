@@ -1,3 +1,5 @@
+/* globals */
+
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata&display=swap");
 
@@ -5,15 +7,16 @@
   --cursor-visibility: hidden;
 }
 
+/* scrollbar-------------------*/
 *::-webkit-scrollbar {
   display: none;
 }
-
 * {
-  -ms-overflow-style: none; /* explorer + others */
-  scrollbar-width: none;   /* firefox */
+  -ms-overflow-style: none; /* Explorer + others */
+  scrollbar-width: none;    /* Firefox */
 }
 
+/* base -------------------*/
 html,
 body {
   margin: 0;
@@ -32,26 +35,26 @@ body {
   overflow: hidden;
 }
 
-body #terminal {
-  color: #657b83; 
+/*terminal styles------------------------*/
+
+body #terminal,
+.shell {
+  color: #657b83;
+  font-family: "Inconsolata", monospace;
 }
 
 .shell {
-  color: white;
-  font-family: "Inconsolata", monospace;
   overflow: auto;
   padding: 10px;
   height: 100vh;
 }
 
+/* loading ------------------- */
+
 #loading {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-
-#fill {
-  overflow: clip;
 }
 
 .loading-bar {
@@ -71,88 +74,26 @@ body #terminal {
 #load-ascii {
   text-align: center;
 }
-
-#ascii-art {
+/* ascii styling ------------------- */
+#ascii-art,
+#ascii-last {
   font-size: 14px;
   line-height: 1.1;
   white-space: pre;
   color: white; 
   width: 100%;
   overflow: auto;
+  text-shadow: #ff0000;
 }
 
-#ascii-last{
-  font-size: 14px;
-  line-height: 1.1;
-  white-space: pre;
+#ascii-last {
   color: green; 
-  width: 100%;
-  overflow: auto;
 }
+
+/* command line*/
 
 #command-UI {
   vertical-align: top;
-}
-
-.menu {
-  margin-bottom: 10px;
-}
-
-.menu-item {
-  cursor: pointer;
-  margin-right: 10px;
-}
-
-.prompt {
-  display: inline-block;
-}
-
-.input {
-  background-color: transparent;
-  border: none;
-  color: white;
-  font-family: monospace;
-  font-size: inherit;
-  outline: none;
-  width: 1ch;
-  caret-color: transparent;
-}
-
-.output,
-.output-project {
-  background-color: transparent;
-  color: white;
-  margin: 0;
-  padding: 0;
-  overflow-y: hidden;
-}
-
-.text-green {
-  color: #7cfc00;
-}
-
-.text-blue {
-  color: #b0e0e6;
-}
-
-.text-yellow {
-  color: #ffff00;
-}
-
-.text-pink {
-  color: #ff1493;
-}
-
-.text-red {
-  color: #ff0000;
-}
-
-.text-orange {
-  color: #ffa500;
-}
-
-.text-gray {
-  color: #acadab;
 }
 
 #terminal-line {
@@ -162,7 +103,7 @@ body #terminal {
 }
 
 #prompt {
-  font-size: 12px;
+  font-size: 18px;
 }
 
 #command {
@@ -176,13 +117,21 @@ body #terminal {
 }
 
 .input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-family: monospace;
+  font-size: inherit;
+  outline: none;
+  width: 1ch;
+  caret-color: transparent;
   font-size: 1em;
-  width: auto;
   min-width: 2ch;
-   }
 }
 
-    .project-showcase {
+/* project showcasing */
+
+.project-showcase {
   padding: 1rem 0;
 }
 
@@ -245,74 +194,80 @@ body #terminal {
 }
 
 .text-green { color: #98c379; }
+.text-blue { color: #b0e0e6; }
 .text-yellow { color: #e5c07b; }
 .text-pink { color: #e06c75; }
+.text-red { color: #ff0000; }
+.text-orange { color: #ffa500; }
 .text-gray { color: #abb2bf; }
-
 
 @media (max-width: 768px) {
   body,
   html {
-      font-size: 85%;
-      line-height: 4.5vmin;
-      padding: 0 10px;
+    font-size: 85%;
+    line-height: 4.5vmin;
+    padding: 0 10px;
   }
 
   #terminal,
   .shell {
-      width: 100%;
-      padding: 8px;
-      height: auto;
+    width: 100%;
+    padding: 8px;
+    height: auto;
   }
 
   .loading-bar {
-      margin-top: 20px;
-      height: 80vh;
+    margin-top: 20px;
+    height: 80vh;
   }
 
   #loading-text {
-      font-size: 1.2em;
+    font-size: 1.2em;
   }
 
   .menu-item {
-      margin-right: 5px;
+    margin-right: 5px;
   }
 
   .output,
   .output-project {
-      padding: 5px;
-      overflow-y: auto;
+    padding: 5px;
+    overflow-y: auto;
   }
 
   #command-line {
-      flex-direction: column;
-      align-items: flex-start;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .prompt {
-      margin-bottom: 8px;
+    margin-bottom: 8px;
   }
 }
 
-@media screen and (max-width: 900px, max-height: 100%,) {
-    .ascii, #load-ascii 
-        font-size: 10px;
-        content-align: center;
-    }
+/* Default font size for larger screens */
+#ascii-art {
+  font-size: 20px;
 }
 
+/* Adjust font size for screens smaller than 900px */
+@media screen and (max-width: 900px) {
+  #ascii-art {
+    font-size: 12px;
+  }
+}
+
+/* Adjust font size for screens smaller than 700px */
 @media screen and (max-width: 700px) {
-    .ascii, .ascii-art, #load-ascii {
-        font-size: 5px;
-        
-    }
+  #ascii-art {
+    font-size: 10px;
+  }
 }
 
-@media (max-width: 768px) {
-  body,
-  html {
-      font-size: 85%;
-      line-height: 4.5vmin;
-      padding: 0 10px;
+/* Adjust font size for screens smaller than 500px */
+@media screen and (max-width: 500px) {
+  #ascii-art {
+    font-size: 8px;
   }
 
+  
