@@ -32,8 +32,8 @@ const commands = [
     details: "Clears the terminal screen." 
   },
   { 
-    command: "test", 
-    details: "Opens the specified link in a new tab." 
+    command: "v1", 
+    details: "secret." 
   },
   { 
     command: "test", 
