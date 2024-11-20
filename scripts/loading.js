@@ -12,7 +12,7 @@ const ANIMATION_CONFIG = {
     ],
     TIMING: {
         DOT_UPDATE: 500,
-        PROGRESS_UPDATE: 250
+        PROGRESS_UPDATE: 0
     },
     MIN_WIDTH: 350
 };
