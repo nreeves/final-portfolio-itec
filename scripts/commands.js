@@ -49,8 +49,7 @@ const commands = [
   const links = {
     "github": "https://github.com/nreeves",
     "linkedin": "https://www.linkedin.com/in/nreeves",
-    "buffaloretreat": "https://github.com/nreeves/buffalo-retreat",
-    "medicifoundation": "insert soon"
+    "v1": "https://nreeves.github.io/nreeves/",
   };
   
   const commandFunctions = {
