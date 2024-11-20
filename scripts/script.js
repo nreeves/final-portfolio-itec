@@ -29,6 +29,9 @@ const commandFunctions = {
   list() {
     return commands.map(command => `<span class="text-green">${command.command}</span> - ${command.details} <br>`).join('');
   },
+  ls() {
+    return this.list();
+  },
   about() {
     return FileSystem.readFile("commands/about.html");
   },
@@ -37,6 +40,9 @@ const commandFunctions = {
   },
   contact() {
     return FileSystem.readFile("commands/contact.html");
+  },
+  db() {
+    return FileSystem.readFile("commands/database.html");
   },
   resume() {
     const resumeURL = "commands/resume.html";
@@ -63,7 +69,7 @@ const commandFunctions = {
       }},
         
   
-  links() {
+  socials() {
     return Object.keys(links).map(linkName => `${linkName} <br>`).join('') + `<br><span class="text-gray">Type "open <span class="text-pink">[link-name]</span>" to open a link in a new tab</span>`;
   },
 };

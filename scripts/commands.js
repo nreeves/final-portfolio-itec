@@ -24,24 +24,16 @@ const commands = [
     details: "Displays my resume." 
   },
   { 
-    command: "links", 
-    details: "Shows all available links." 
+    command: "socials", 
+    details: "Shows all available social links." 
+  },
+  { 
+    command: "db", 
+    details: "database projects" 
   },
   { 
     command: "clear", 
     details: "Clears the terminal screen." 
-  },
-  { 
-    command: "v1", 
-    details: "secret." 
-  },
-  { 
-    command: "test", 
-    details: "Opens the specified link in a new tab." 
-  },
-  { 
-    command: "test", 
-    details: "Opens the specified link in a new tab." 
   }
 ];
 
@@ -78,11 +70,10 @@ const commands = [
         return `<span class="text-red">Invalid link name: ${linkName}</span>`;
       }
     },
-    links: function () {
+    socials: function () {
       return Object.keys(links).join('<br>') + `<br><span class="text-gray">Type "open [link-name]" to open a link in a new tab</span>`;
     },
     clear: function () {
       output.innerHTML = "Type <span class='text-green'>list</span> for a list of commands. <br><br>";
     },
   };
-  
