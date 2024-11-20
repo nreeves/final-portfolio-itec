@@ -17,7 +17,7 @@ const prompt = document.getElementById("prompt");
 
 const stacklist = [
   ["JavaScript", "Python", "HTML", "CSS"],
-  ["GIT", "Django"]
+  ["Git", "Django", "Java", "..."],
 ];
 
 const commandHistory = [];
@@ -114,12 +114,13 @@ function scrollToBottom() {
 
 function createTable(data) {
   const maxCellLength = Math.max(...data.flat().map(cell => cell.length));
-  const border = (char) => `${char}${"─".repeat(maxCellLength + 2)}`;
-  const row = (cells) => cells.map(cell => `│ ${cell.padEnd(maxCellLength)} `).join('') + '│';
+  const border = (char, length) => `${char}${"─".repeat(length + 2)}`;
+  const row = (cells) => cells.map(cell => ` │ ${cell.padEnd(maxCellLength)} `).join('') + '│';
 
-  const topBorder = `┌${border('┬').repeat(data[0].length - 1)}┐`;
-  const bottomBorder = `└${border('┴').repeat(data[0].length - 1)}┘`;
-  const rows = data.map(row).join('\n├' + border('┼').repeat(data[0].length - 1) + '┤\n');
+  const topBorder = `┌${data[0].map(() => border('─', maxCellLength)).join('┬')}┐`;
+  const bottomBorder = `└${data[0].map(() => border('─', maxCellLength)).join('┴')}┘`;
+  const middleBorder = `├${data[0].map(() => border('─', maxCellLength)).join('┼')}┤`;
+  const rows = data.map(row).join(`\n${middleBorder}\n`);
 
   return { maxCellLength, table: `${topBorder}\n${rows}\n${bottomBorder}` };
 }

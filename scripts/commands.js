@@ -62,7 +62,7 @@ const commands = [
       return FileSystem.readFile("commands/contact.html");
     },
     skills: function () {
-      return `<pre class="text-green">JavaScript, Python, HTML, CSS, GIT, Django</pre>`;
+      return `<pre class="text-green">JavaScript, Python, HTML, CSS, Java, Django, Git</pre>`;
     },
     
     open: function (command) {
